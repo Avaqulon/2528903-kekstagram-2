@@ -1,5 +1,5 @@
 import './render-gallery.js';
-import {isEscapeKey, isEnterKey} from './util.js';
+import {isEnterKey} from './util.js';
 import {pictures, similarPhotos} from './render-gallery.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -37,7 +37,7 @@ const openBigPicture = (pictureId) => {
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', isEscapeKey);
+  document.addEventListener('keydown', pressEscapeButton);
 };
 
 pictures.addEventListener('click', (evt) => {
@@ -51,12 +51,12 @@ bigPictureImgOpen.addEventListener('click', () => {
   bigPicture.classList.remove('hidden');
 });
 
-document.addEventListener('keydown', (evt) => {
-  if(evt.key === 'Escape') {
+function pressEscapeButton(evt) {
+  if (evt.key === 'Escape') {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
   }
-});
+}
 
 bigPictureImgOpen.addEventListener('keydown', (evt) => {
   if (isEnterKey (evt)) {
@@ -66,5 +66,5 @@ bigPictureImgOpen.addEventListener('keydown', (evt) => {
 
 bigPictureCancel.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
+  document.removeEventListener('keydown', pressEscapeButton);
 });
-
