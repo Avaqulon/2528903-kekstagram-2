@@ -1,4 +1,4 @@
-import { createPhotos } from './data.js';
+import {createPhotos} from './data.js';
 
 const pictures = document.querySelector('.pictures');
 const templatePicture = document.querySelector('#picture')
@@ -21,4 +21,4 @@ similarPhotos.forEach(({url, description, likes, comments, id}) => {
 
 pictures.appendChild(similarPhotoFragment);
 
-export {pictures};
+export {pictures, similarPhotos};

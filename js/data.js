@@ -1,5 +1,5 @@
-import { getRandomArrayElement } from './util.js';
-import { getRandomInteger } from './util.js';
+import {getRandomArrayElement} from './util.js';
+import {getRandomInteger} from './util.js';
 
 const MESSAGES = [
   'Всё отлично!',
@@ -54,4 +54,3 @@ const createPhoto = () => {
 };
 
 export const createPhotos = () => Array.from({length: LENGTH_PHOTOS}, createPhoto);
-
