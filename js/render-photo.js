@@ -1,6 +1,6 @@
 import './render-gallery.js';
 import {isEnterKey} from './util.js';
-import {pictures, similarPhotos} from './render-gallery.js';
+import {similarPhotos} from './render-gallery.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgOpen = bigPicture.querySelector('.big-picture__img').querySelector('img');
@@ -12,15 +12,15 @@ const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-const openBigPicture = (pictureId) => {
-  const currentPhoto = similarPhotos.find(({ id }) => id.toString() === pictureId);
+export const openBigPicture = ({url, likes, description}) => {
+  //const currentPhoto = similarPhotos.find(({ id }) => id.toString() === pictureId);
   const socialCommentsFragment = document.createDocumentFragment();
 
-  bigPictureImgOpen.src = currentPhoto.url;
-  likesCount.textContent = currentPhoto.likes;
+  bigPictureImgOpen.src = url;
+  likesCount.textContent = likes;
   socialComments.innerHTML = '';
 
-  currentPhoto.comments.forEach((comment) => {
+  similarPhotos.comments.forEach((comment) => {
     const socialComment = socialCommentTemplate.cloneNode(true);
 
     socialComment.querySelector('.social__picture').src = comment.avatar;
@@ -31,7 +31,7 @@ const openBigPicture = (pictureId) => {
   });
 
   socialComments.appendChild(socialCommentsFragment);
-  socialCaption.textContent = currentPhoto.description;
+  socialCaption.textContent = description;
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
 
@@ -39,13 +39,6 @@ const openBigPicture = (pictureId) => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', pressEscapeButton);
 };
-
-pictures.addEventListener('click', (evt) => {
-  const currentPicture = evt.target.closest('.picture');
-  if(currentPicture){
-    openBigPicture(currentPicture.dataset.pictureId);
-  }
-});
 
 bigPictureImgOpen.addEventListener('click', () => {
   bigPicture.classList.remove('hidden');

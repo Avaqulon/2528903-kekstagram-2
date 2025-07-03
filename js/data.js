@@ -35,7 +35,7 @@ const createId = () => {
 const createIdComment = createId();
 const createIdPhoto = createId();
 
-const createComment = () => ({
+export const createComment = () => ({
   id: createIdComment(),
   avatar: `img/avatar-${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
   message: getRandomArrayElement(MESSAGES),
