@@ -1,4 +1,4 @@
-import {createPhotos, createComment} from './data.js';
+import {createPhotos} from './data.js';
 import { openBigPicture } from './render-photo.js';
 
 const pictures = document.querySelector('.pictures');
@@ -22,27 +22,21 @@ similarPhotos.forEach(({url, description, likes, comments, id}) => {
 
 pictures.appendChild(similarPhotoFragment);
 
+const getPictureData = (currentPictureId) => similarPhotos.find(({ id }) => id.toString() === currentPictureId);
+
 const onPicturesClick = (evt) => {
   const currentPicture = evt.target.closest('.picture');
   if (!currentPicture) {
     return;
   }
 
-  const getPictureData = similarPhotos.find(({ id }) => id.toString() === createPhotos.id);
-  const pictureData = getPictureData(evt.dataset.id);
+  const pictureData = getPictureData(currentPicture.dataset.pictureId);
 
-  if(pictureData){
+  if (pictureData) {
     openBigPicture(pictureData);
   }
 };
 
 pictures.addEventListener('click', onPicturesClick);
-
-pictures.addEventListener('click', (evt) => {
-  const currentPicture = evt.target.closest('.picture');
-  if(currentPicture){
-    openBigPicture(currentPicture.dataset.pictureId);
-  }
-});
 
 export {pictures, similarPhotos};

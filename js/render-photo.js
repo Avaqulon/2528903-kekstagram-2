@@ -1,6 +1,5 @@
 import './render-gallery.js';
 import {isEnterKey} from './util.js';
-import {similarPhotos} from './render-gallery.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgOpen = bigPicture.querySelector('.big-picture__img').querySelector('img');
@@ -12,15 +11,14 @@ const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-export const openBigPicture = ({url, likes, description}) => {
-  //const currentPhoto = similarPhotos.find(({ id }) => id.toString() === pictureId);
+export const openBigPicture = ({url, likes, description, comments }) => {
   const socialCommentsFragment = document.createDocumentFragment();
 
   bigPictureImgOpen.src = url;
   likesCount.textContent = likes;
   socialComments.innerHTML = '';
 
-  similarPhotos.comments.forEach((comment) => {
+  comments.forEach((comment) => {
     const socialComment = socialCommentTemplate.cloneNode(true);
 
     socialComment.querySelector('.social__picture').src = comment.avatar;
