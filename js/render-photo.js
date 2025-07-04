@@ -44,7 +44,6 @@ bigPictureImgOpen.addEventListener('click', () => {
 
 function pressEscapeButton(evt) {
   if (evt.key === 'Escape') {
-    evt.preventDefault();
     bigPicture.classList.add('hidden');
   }
 }
